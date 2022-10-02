@@ -1,14 +1,11 @@
 <template>
   <div class="home">
-    <Header msg="Welcome to Your Vue.js + TypeScript App"/>
+    <Header />
     <div class="background_wrap">
       <h1 class="title">Please search for a station.</h1>
       <div class="background_input_wrap">
         <input type="text" class="search_input" v-model="values"/>
-        <router-link to="/Detail" class="search_btn">
           <button class="search_btn_detail" @click="Details">Search</button>
-
-        </router-link>
       </div>
     </div>
   </div>
@@ -27,22 +24,31 @@
 export default class extends Vue {
 
   Details(){
-    alert(this.values);
-  }
-
-  fetchTodo() {
+    let count = 0;
     const url1 = 'https://api.odcloud.kr/api/15041096/v1/uddi:e83cfa23-23e6-4d02-a061-cb427648c51e?page=1&perPage=22&serviceKey=suyekkuR7SRO2720g7tgje0Nr1frEuxvzTGqC29kOGrjWzm8b3jdikE0%2Fz4HtHCm3YSdxOp%2FLnAtzPwwATb6lg%3D%3D';
     try {
         fetch(url1).then(response => response.json())
         .then(data =>{
-          console.log(data.data[0]);
-          // for(let i=0; i<21; i++){
+          for(let i=0; i<=20; i++){
+            if(this.values === data.data[i].역명.slice(0, data.data[i].역명.indexOf('(') === -1 ? 10 : data.data[i].역명.indexOf('('))){
+              alert(`
+              ${data.data[i].역명}역
+              도로명주소 : ${data.data[i].도로명주소} 
+              지번주소 : ${data.data[i].지번주소}
+              철도운영기관명 : ${data.data[i].역명}
             
-          // }
+              모든 경전철의 세부 정보를 원하신다면 타이틀을 클릭해주세요.`)
+            } else {
+              count++;
+            }
+          }
+          if(count===21){
+            alert('역을 찾을 수 없습니다. 정확하게 입력해주세요.')
+          }
         });
       } catch (error) {
-      console.log(error);
-    }
+        console.log(error);
+      }
   }
   data(){
     return{
