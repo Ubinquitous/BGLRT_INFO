@@ -1,11 +1,11 @@
 <template>
     <div class="header_wrap">
       <div class="header_box">
-        <img src="https://www.bglrt.com/_res/default/img/inc/logo_bgl(k).png" alt="부산김해경전철" class="logo" />
-        <div class="custom_line" />
+        <router-link to="/"><img src="https://www.bglrt.com/_res/default/img/inc/logo_bgl(k).png" alt="부산김해경전철" class="logo" /></router-link>
       </div>
+      <div class="custom_line" />
       <div class="header_box_title">
-        <h1 class="title">Busan-Gimhae Light Rail Transit Information</h1>
+        <h1><router-link to="/detail" class="title">Busan-Gimhae Light Rail Transit Information</router-link></h1>
       </div>
     </div>
   </template>
@@ -29,6 +29,10 @@
     .header_wrap {
       width:100%;
       height:25vh;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
     }
     .header_box {
       flex-direction: column;
@@ -37,6 +41,10 @@
       align-items: center;
       width:100%;
       height:90px;
+    }
+
+    .title {
+      color:#2C3E50;
     }
 
     .custom_line {
